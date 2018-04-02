@@ -12,6 +12,12 @@ public class MainActivity extends AppCompatActivity {
 
     int r;
 
+    public void makeToast(String string) {
+
+        Toast.makeText(MainActivity.this, string, Toast.LENGTH_SHORT).show();
+
+    }
+
     public void guessButton(View view) {
 
         EditText number = (EditText) findViewById(R.id.number);
@@ -20,22 +26,25 @@ public class MainActivity extends AppCompatActivity {
 
         if (userNumber > r && userNumber < 101) {
 
-            Toast.makeText(MainActivity.this, "Too high, try again!", Toast.LENGTH_SHORT).show();
+            makeToast("Too high!");
             Log.i("Info", "Guess Button was pressed! user guessed too HIGH of " + number.getText().toString() + " but the random number is " + r);
 
         } else if (userNumber < r && userNumber > 0) {
 
-            Toast.makeText(MainActivity.this, "Too low, try again!", Toast.LENGTH_SHORT).show();
+            makeToast("Too low!");
             Log.i("Info", "Guess Button was pressed! user guessed too LOW of " + number.getText().toString() + " but the random number is " + r);
         } else if (userNumber < 1 || userNumber > 100) {
 
-            Toast.makeText(MainActivity.this, "You must guess a number from 1-100!", Toast.LENGTH_LONG).show();
+            makeToast("You must guess a number from 1-100!");
             Log.i("Info", "Guess Button was pressed! User did not follow instructions and exceeded parameters" + number.getText().toString() + " but the random number is " + r);
 
         } else {
 
-            Toast.makeText(MainActivity.this, "Congratulations, You guessed the correct number!", Toast.LENGTH_LONG).show();
+            makeToast("Congratulations, You guessed the correct number!, play again?");
             Log.i("Info", "Guess Button was pressed! User guessed CORRECTLY with " + number.getText().toString() + " and the random number was " + r);
+
+            Random rand = new Random();
+            r = rand.nextInt(100)+1;
 
         }
     }
